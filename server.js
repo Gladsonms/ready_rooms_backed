@@ -27,9 +27,9 @@ mongoose
   });
 
 //Routes
-fs.readdirSync("./routes").map((r) => app.use("/", require(`./routes/${r}`)));
+//fs.readdirSync("./routes").map((r) => app.use("/", require(`./routes/${r}`)));
 
-//const authRouter = require("./routes/auth");
+const authRouter = require("./routes/auth");
 
 // PORT
 const PORT = process.env.PORT || 7000;
@@ -37,9 +37,10 @@ const PORT = process.env.PORT || 7000;
 // Middleware
 app.use(cors());
 app.use(morgan("tiny"));
+app.use(express.json());
 
 //router middleware
-// app.use("/", authRouter);
+app.use("/", authRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT: ${PORT}`);
