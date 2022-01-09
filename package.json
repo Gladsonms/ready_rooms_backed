@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node server",
     "dev": "nodemon server",
@@ -17,6 +18,7 @@
     "dotenv": "^10.0.0",
     "esm": "^3.2.25",
     "express": "^4.17.2",
+    "express-async-handler": "^1.2.0",
     "mongoose": "^6.1.5",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15"

@@ -1,16 +1,14 @@
 /* ====== create node.js server with express.js framework ====== */
 // dependencies
-const express = require("express");
-
-const fs = require("fs");
+import express from "express";
+import morgan from "morgan";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import { errorHandler } from "./middlewares/errorHandlingMiddleware.js";
 
 const app = express();
-const morgan = require("morgan");
-const cors = require("cors");
-const mongoose = require("mongoose");
-
-require("dotenv").config();
-
+dotenv.config();
 //Databse connection
 
 mongoose
@@ -26,10 +24,7 @@ mongoose
     console.log("Database connection error", error);
   });
 
-//Routes
-//fs.readdirSync("./routes").map((r) => app.use("/", require(`./routes/${r}`)));
-
-const authRouter = require("./routes/auth");
+import authRouter from "./routes/auth.js";
 
 // PORT
 const PORT = process.env.PORT || 7000;
@@ -41,6 +36,9 @@ app.use(express.json());
 
 //router middleware
 app.use("/", authRouter);
+
+//Error handling Middleware
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT: ${PORT}`);
