@@ -3,8 +3,9 @@ const router = express.Router();
 
 //controllers
 
-import { userSignup } from "../controllers/auth.js";
+import { userSignup, userLogin } from "../controllers/auth.js";
 
 router.post("/userregister", userSignup);
+router.post("/userlogin", userLogin);
 
 export default router;

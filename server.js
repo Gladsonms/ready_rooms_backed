@@ -5,7 +5,10 @@ import morgan from "morgan";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { errorHandler } from "./middlewares/errorHandlingMiddleware.js";
+import {
+  errorHandler,
+  notFound,
+} from "./middlewares/errorHandlingMiddleware.js";
 
 const app = express();
 dotenv.config();
@@ -35,9 +38,10 @@ app.use(morgan("tiny"));
 app.use(express.json());
 
 //router middleware
-app.use("/", authRouter);
+app.use("/auth", authRouter);
 
 //Error handling Middleware
+app.use(notFound);
 app.use(errorHandler);
 
 app.listen(PORT, () => {

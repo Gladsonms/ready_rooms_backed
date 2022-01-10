@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
     stripe_seller: {},
     stripeSession: {},
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 userSchema.pre("save", function (next) {
   let user = this;
@@ -49,6 +49,9 @@ userSchema.pre("save", function (next) {
     return next();
   }
 });
+userSchema.methods.comparePassword = async function (password) {
+  return await bycrpt.compare(password, this.password);
+};
 
 const User = mongoose.model("User", userSchema);
 
