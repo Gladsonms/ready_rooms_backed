@@ -4,6 +4,15 @@ const { schema } = mongoose;
 import bycrpt from "bcrypt";
 const userSchema = new mongoose.Schema(
   {
+    accountType: {
+      type: String,
+      enum: ["owner", "customer"],
+    },
+    accountStatus: {
+      type: Boolean,
+      default: true,
+    },
+
     username: {
       type: String,
       trim: true,
@@ -26,6 +35,10 @@ const userSchema = new mongoose.Schema(
       required: "Password is needed",
       min: 6,
       max: 64,
+    },
+    place: {
+      type: String,
+      trim: true,
     },
 
     stripe_account_id: "",
